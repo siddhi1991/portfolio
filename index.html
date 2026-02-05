@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddhi Garg - GIS & Remote Sensing Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a4d68;
+            --secondary: #088395;
+            --accent: #05bfdb;
+            --dark: #001524;
+            --light: #f8f9fa;
+            --gradient-1: linear-gradient(135deg, #0a4d68 0%, #088395 50%, #05bfdb 100%);
+            --gradient-2: linear-gradient(45deg, rgba(10,77,104,0.05) 0%, rgba(5,191,219,0.1) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(248, 249, 250, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(10, 77, 104, 0.1);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem 4rem;
+            background: var(--gradient-2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(5,191,219,0.15) 0%, transparent 70%);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, 50px) rotate(180deg); }
+        }
+
+        .hero .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            color: var(--primary);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .hero .intro {
+            max-width: 800px;
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--accent);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-8px);
+        }
+
+        .skill-category h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category h3::before {
+            content: '▸';
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.6rem 0;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+            transition: padding-left 0.3s;
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        .skill-list li:hover {
+            padding-left: 0.5rem;
+            color: var(--secondary);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .project-header {
+            background: var(--gradient-1);
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .project-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-body {
+            padding: 2rem;
+        }
+
+        .project-description {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: var(--gradient-2);
+            color: var(--secondary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(8, 131, 149, 0.2);
+        }
+
+        .project-highlights {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-highlights li {
+            padding: 0.5rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .project-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .project-impact {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            margin-top: 1rem;
+        }
+
+        .project-impact strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-impact span {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark);
+            color: white;
+            padding: 5rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .contact-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            background: white;
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.3);
+        }
+
+        .contact-btn.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">SIDDHI GARG</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="about">
+        <div class="container">
+            <h1>GIS & Remote Sensing Specialist</h1>
+            <p class="subtitle">Transforming Geospatial Data into Actionable Intelligence</p>
+            <p class="intro">
+                PhD in Geology with 9+ years of experience in advanced geospatial analysis, remote sensing, 
+                and Python-based automation. Specialized in UAV integration, utility infrastructure mapping, 
+                large-scale environmental monitoring, and automated data processing. Proven track record in delivering 
+                data-driven solutions for utility, environmental, and infrastructure applications.
+            </p>
+            <div class="stats">
+                <div class="stat-card fade-in">
+                    <div class="stat-number">9+</div>
+                    <div class="stat-label">Years of Experience</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Datasets Processed</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">274K+</div>
+                    <div class="stat-label">Features Mapped</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Professionals Trained</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-header">
+            <h2>Technical Expertise</h2>
+            <p>Comprehensive skill set spanning geospatial analysis, remote sensing, and automation</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <h3>GIS Platforms</h3>
+                <ul class="skill-list">
+                    <li>ESRI ArcGIS Suite (Pro, Online, Desktop)</li>
+                    <li>QGIS & Open-Source GIS</li>
+                    <li>Geodatabase Design & Management</li>
+                    <li>Spatial Analysis & Geoprocessing</li>
+                    <li>Web Mapping & Dashboards</li>
+                </ul>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Remote Sensing & Imagery</h3>
+                <ul class="skill-list">
+                    <li>Satellite Image Processing</li>
+                    <li>UAV/Drone Data Integration</li>
+                    <li>DEM & Orthophoto Processing</li>
+                    <li>Digital Feature Extraction (GeoAI)</li>
+                    <li>Multi-temporal Analysis</li>
+                </ul>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Programming & Automation</h3>
+                <ul class="skill-list">
+                    <li>Python (GeoPandas, Leaflet, Geemap)</li>
+                    <li>Automated Data Pipelines</li>
+                    <li>PostgreSQL & PostGIS</li>
+                    <li>Google Colab & Cloud Computing</li>
+                    <li>Workflow Documentation</li>
+                </ul>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Field & Data Collection</h3>
+                <ul class="skill-list">
+                    <li>DGPS Field Operations</li>
+                    <li>UAV Flight Planning & Execution</li>
+                    <li>Utility Locating Equipment</li>
+                    <li>Ground Truthing & Validation</li>
+                    <li>QA/QC Protocols</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-header">
+            <h2>Featured Projects</h2>
+            <p>Diverse applications of GIS and remote sensing across multiple industries</p>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- Project 1: Utility Infrastructure Mapping -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-number">PROJECT 01</div>
+                    <h3>Campus Utility Infrastructure Mapping</h3>
+                    <p class="project-subtitle">Comprehensive Underground Utility Asset Management</p>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Designed and implemented end-to-end GIS workflows for mapping underground utilities 
+                        and campus infrastructure using multi-source data integration including DGPS, UAV, 
+                        and utility locators.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">ArcGIS Pro</span>
+                        <span class="tech-tag">ArcGIS Online</span>
+                        <span class="tech-tag">DGPS</span>
+                        <span class="tech-tag">UAV</span>
+                        <span class="tech-tag">Geodatabase</span>
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Digital feature extraction from 65+ years of historical campus maps</li>
+                        <li>Georeferencing and projection management for archival data</li>
+                        <li>Kansas One-Call ticket processing for compliance</li>
+                        <li>Multi-layer QA/QC for field operation accuracy</li>
+                    </ul>
+                    <div class="project-impact">
+                        <strong>Impact:</strong>
+                        <span>Enhanced campus safety, reduced excavation risks, and established maintainable digital asset registry</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: High-Resolution Terrain Analysis -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-number">PROJECT 02</div>
+                    <h3>High-Resolution Terrain & Feature Analysis</h3>
+                    <p class="project-subtitle">UAV-Satellite Integration for Environmental Monitoring</p>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Integrated UAV-derived 3D models with multi-temporal satellite imagery to map hundreds 
+                        of environmental features at sub-meter resolution, achieving unprecedented accuracy for 
+                        micro-scale terrain analysis and change detection.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">UAV Photogrammetry</span>
+                        <span class="tech-tag">Satellite Imagery</span>
+                        <span class="tech-tag">3D Modeling</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Change Detection</span>
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Sub-meter accuracy for micro-scale environmental features</li>
+                        <li>Multi-temporal analysis spanning historical to current imagery</li>
+                        <li>Advanced 3D terrain modeling and visualization</li>
+                        <li>Team leadership from concept to peer-reviewed publication</li>
+                    </ul>
+                    <div class="project-impact">
+                        <strong>Impact:</strong>
+                        <span>Improved spatial accuracy by 10x compared to traditional methods; published research advancing remote sensing techniques</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Python Automation Pipeline -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-number">PROJECT 03</div>
+                    <h3>Automated Geospatial Data Processing Pipeline</h3>
+                    <p class="project-subtitle">Python-Based Workflow for Large-Scale Analysis</p>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Developed Python automation pipelines to process and analyze geospatial data for 500+ 
+                        environmental features, dramatically reducing processing time while maintaining data quality 
+                        and consistency across large-scale datasets.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">GeoPandas</span>
+                        <span class="tech-tag">Automation</span>
+                        <span class="tech-tag">Data Pipelines</span>
+                        <span class="tech-tag">Google Colab</span>
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Batch processing for 500+ individual feature datasets</li>
+                        <li>Standardized workflow documentation for reproducibility</li>
+                        <li>Quality control automation with error handling</li>
+                        <li>Integration with cloud computing platforms</li>
+                    </ul>
+                    <div class="project-impact">
+                        <strong>Impact:</strong>
+                        <span>80% reduction in processing time; enabled scalable analysis for international research collaboration</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: Global Environmental Monitoring -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-number">PROJECT 04</div>
+                    <h3>Global Environmental Feature Inventory Management</h3>
+                    <p class="project-subtitle">International Collaboration for Climate Research</p>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Collaborated with international teams across 5 countries to maintain and update geospatial 
+                        datasets for 274,000+ environmental features, supporting global-scale monitoring initiatives 
+                        and climate research programs.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Remote Sensing</span>
+                        <span class="tech-tag">Data Management</span>
+                        <span class="tech-tag">Quality Assurance</span>
+                        <span class="tech-tag">Multi-Source Integration</span>
+                        <span class="tech-tag">Metadata Standards</span>
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Standardized metadata across 274K+ features</li>
+                        <li>Cross-border data harmonization protocols</li>
+                        <li>Multi-team coordination and version control</li>
+                        <li>Documentation for long-term dataset sustainability</li>
+                    </ul>
+                    <div class="project-impact">
+                        <strong>Impact:</strong>
+                        <span>Critical data infrastructure supporting climate change research and policy decisions worldwide</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5: Land Cover Mapping & Training -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-number">PROJECT 05</div>
+                    <h3>Land Cover Classification & Training Program</h3>
+                    <p class="project-subtitle">Professional Development & Remote Sensing Education</p>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Designed and delivered comprehensive GIS training workshops for 50+ professionals and 
+                        students through OhioView Program, focusing on land cover mapping and vegetation monitoring 
+                        using open-source tools.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">ArcGIS Pro</span>
+                        <span class="tech-tag">Google Earth Engine</span>
+                        <span class="tech-tag">Classification</span>
+                        <span class="tech-tag">Training</span>
+                        <span class="tech-tag">Vegetation Analysis</span>
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Hands-on workshops with real-world datasets</li>
+                        <li>Open-source GIS tool demonstrations</li>
+                        <li>Land cover classification methodologies</li>
+                        <li>Technical documentation and support materials</li>
+                    </ul>
+                    <div class="project-impact">
+                        <strong>Impact:</strong>
+                        <span>Empowered 50+ professionals with practical GIS skills; contributed to workforce development in geospatial field</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6: Crime Analysis Geodatabase -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-number">PROJECT 06</div>
+                    <h3>Spatial Crime Analysis Platform</h3>
+                    <p class="project-subtitle">Advanced Spatial Statistics for Public Safety</p>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Designed comprehensive geodatabase and performed advanced spatial analysis including 
+                        hotspot analysis, spatial autocorrelation, and kernel density estimation for graduate-level 
+                        crime analysis research.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Geodatabase Design</span>
+                        <span class="tech-tag">Spatial Statistics</span>
+                        <span class="tech-tag">Hotspot Analysis</span>
+                        <span class="tech-tag">K-Density</span>
+                        <span class="tech-tag">Data Visualization</span>
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Custom geodatabase schema for crime data</li>
+                        <li>Moran's I spatial autocorrelation analysis</li>
+                        <li>Getis-Ord Gi* hotspot identification</li>
+                        <li>Interactive dashboards for pattern visualization</li>
+                    </ul>
+                    <div class="project-impact">
+                        <strong>Impact:</strong>
+                        <span>Provided actionable insights for resource allocation; demonstrated GIS applications in public safety sector</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 7: Web Mapping Application -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-number">PROJECT 07</div>
+                    <h3>Interactive Environmental Web Dashboard</h3>
+                    <p class="project-subtitle">Real-Time Data Visualization & Public Engagement</p>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Developed interactive web mapping applications and dashboards using ArcGIS Online and 
+                        Python libraries (Leaflet, Geemap) for public-facing environmental data visualization 
+                        and stakeholder engagement.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Web Mapping</span>
+                        <span class="tech-tag">Leaflet</span>
+                        <span class="tech-tag">Geemap</span>
+                        <span class="tech-tag">Dashboards</span>
+                        <span class="tech-tag">Data Viz</span>
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Mobile-responsive interface design</li>
+                        <li>Real-time data integration and updates</li>
+                        <li>Custom basemaps and layer controls</li>
+                        <li>Public accessibility and user engagement features</li>
+                    </ul>
+                    <div class="project-impact">
+                        <strong>Impact:</strong>
+                        <span>Increased public access to environmental data; enhanced stakeholder communication and transparency</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 8: Multi-Source Data Integration -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-number">PROJECT 08</div>
+                    <h3>Multi-Sensor Environmental Monitoring System</h3>
+                    <p class="project-subtitle">Integrated Analysis of Diverse Geospatial Data Sources</p>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Integrated diverse data sources including satellite imagery, UAV surveys, field measurements, 
+                        and historical records into unified geospatial analysis framework for comprehensive 
+                        environmental assessment.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Data Fusion</span>
+                        <span class="tech-tag">Multi-Sensor</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">PostGIS</span>
+                        <span class="tech-tag">Integration</span>
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Harmonization of temporal and spatial scales</li>
+                        <li>Database design for heterogeneous data types</li>
+                        <li>Cross-validation and uncertainty quantification</li>
+                        <li>Scalable architecture for ongoing data collection</li>
+                    </ul>
+                    <div class="project-impact">
+                        <strong>Impact:</strong>
+                        <span>Comprehensive environmental baseline established; improved decision-making through integrated analysis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Let's Collaborate</h2>
+            <p>
+                Interested in leveraging GIS and remote sensing for your next project? 
+                Let's discuss how geospatial analysis can drive your business forward.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:sgarg@g.emporia.edu" class="contact-btn">Email Me</a>
+                <a href="https://www.linkedin.com/in/siddhi-garg" class="contact-btn secondary">LinkedIn</a>
+                <a href="https://github.com/siddhigarg" class="contact-btn secondary">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Siddhi Garg. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
